@@ -1,0 +1,42 @@
+{
+  "name": "metric-logger",
+  "version": "1.0.0",
+  "description": "a metric logging and reporting service that sums metrics by time window for the most recent hour.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run eslint && nodemon --exec babel-node src/index.js",
+    "eslint": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kampkelly/metric-logger.git"
+  },
+  "keywords": [
+    "metric"
+  ],
+  "author": "Runor Adjekpiyede",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kampkelly/metric-logger/issues"
+  },
+  "homepage": "https://github.com/kampkelly/metric-logger#readme",
+  "devDependencies": {
+    "@babel/core": "^7.9.6",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-transform-runtime": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@babel/register": "^7.9.0",
+    "eslint": "^7.0.0",
+    "eslint-plugin-import": "^2.20.2",
+    "nodemon": "^2.0.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "express": "^4.17.1",
+    "moment": "^2.26.0"
+  }
+}
