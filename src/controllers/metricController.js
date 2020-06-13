@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+import getMetricsValuesInLastHour, { sumMetricValues } from '../helpers/metrics';
+
 /**
    * @export
    * @class metricController
@@ -33,6 +35,25 @@ class metricController {
     }
     return res.status(200).json({ datastructure });
     // return res.status(200).json({});
+  }
+
+  /**
+    * @description -This method gets the sum of a metric
+    * @param {object} req - The request payload
+    * @param {object} res - The response payload sent back from the method
+    * @returns {object} - sum of metric values
+    */
+  static getMetricSum(req, res) {
+    const datastructure = req.app.get('appData');
+    const { key } = req.params;
+    if (key in datastructure.metrics) {
+      // filter only metrics that have date in recent hour
+      const metricsValuesInLastHour = datastructure.metrics[key].map(getMetricsValuesInLastHour);
+      const sumValues = metricsValuesInLastHour.reduce(sumMetricValues, 0);
+
+      return res.status(200).json({ value: sumValues });
+    }
+    return res.status(404).json({ message: 'Metric key not found!' });
   }
 }
 
