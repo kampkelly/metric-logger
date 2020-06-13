@@ -33,8 +33,9 @@ class metricController {
         dateTime: new Date(),
       }];
     }
-    return res.status(200).json({ datastructure });
-    // return res.status(200).json({});
+    const oneHour = 1000 * 60 * 60;
+    setTimeout(() => { datastructure.metrics[key].splice(0, 1); }, oneHour);
+    return res.status(200).json({});
   }
 
   /**
