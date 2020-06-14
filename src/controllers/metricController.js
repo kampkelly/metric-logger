@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import getMetricsValuesInLastHour, { sumMetricValues } from '../helpers/metrics';
+import getMetricValuesInLastHour from '../helpers/metrics';
 
 /**
    * @export
@@ -19,22 +19,23 @@ class metricController {
     const { key } = req.params;
     const { value } = req.body;
 
-    const currentTime = moment(new Date());
+    const currentDateTime = moment(new Date());
 
-    // if key is already present
+    const metricData = {
+      value,
+      dateTime: currentDateTime,
+    };
+    // if key is already present, just add to it
     if (key in datastructure.metrics) {
-      datastructure.metrics[key].push({
-        value,
-        dateTime: currentTime,
-      });
+      datastructure.metrics[key].push(metricData);
     } else {
-      datastructure.metrics[key] = [{
-        value,
-        dateTime: new Date(),
-      }];
+      datastructure.metrics[key] = [metricData];
     }
+
     const oneHour = 1000 * 60 * 60;
+    // delete this metric after 1 hour
     setTimeout(() => { datastructure.metrics[key].splice(0, 1); }, oneHour);
+
     return res.status(200).json({});
   }
 
@@ -48,9 +49,9 @@ class metricController {
     const datastructure = req.app.get('appData');
     const { key } = req.params;
     if (key in datastructure.metrics) {
-      // filter only metrics that have date in recent hour
-      const metricsValuesInLastHour = datastructure.metrics[key].map(getMetricsValuesInLastHour);
-      const sumValues = metricsValuesInLastHour.reduce(sumMetricValues, 0);
+      // filter for only metrics that have been added in the last hour
+      const metricValuesInLastHour = datastructure.metrics[key].map(getMetricValuesInLastHour);
+      const sumValues = metricValuesInLastHour.reduce((sum, currentValue) => sum + currentValue, 0);
 
       return res.status(200).json({ value: sumValues });
     }
