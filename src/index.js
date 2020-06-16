@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import serverless from 'serverless-http';
 
 import metricRouter from './routes/metric';
 
@@ -38,4 +39,4 @@ app.listen(PORT, () => {
   console.log(`server started at http://localhost:${PORT}`);
 });
 
-export default app;
+module.exports.run = serverless(app);

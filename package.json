@@ -5,6 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src --out-dir dist",
+    "prod": "node dist/index.js",
     "start": "npm run eslint && nodemon --exec babel-node src/index.js",
     "eslint": "eslint . --fix"
   },
@@ -32,11 +34,14 @@
     "nodemon": "^2.0.3"
   },
   "dependencies": {
+    "@babel/cli": "^7.10.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint-config-airbnb": "^18.1.0",
     "express": "^4.17.1",
-    "moment": "^2.26.0"
+    "moment": "^2.26.0",
+    "serverless-http": "^2.5.0",
+    "serverless-offline": "^6.4.0"
   }
 }

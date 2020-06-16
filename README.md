@@ -1,7 +1,7 @@
 # App
 _Metric Logger_
 
-The hosted app can be found here: [Google](google.com).
+The hosted app on AWS lambda (serverless) can be found here: [https://vias7rl53l.execute-api.us-east-1.amazonaws.com/dev/](https://vias7rl53l.execute-api.us-east-1.amazonaws.com/dev/).
 The pivotal tracker used for this app can be found here: [https://www.pivotaltracker.com/projects/2452590](https://www.pivotaltracker.com/projects/2452590).
 
 # About
