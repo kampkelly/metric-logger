@@ -11,6 +11,7 @@ A demo of this app can be found here: [demo](https://youtu.be/8mMrYv_DjYM).
 
 # About
 A metric logging and reporting service that sums metrics by time window for the most recent hour.
+Any metric more than an hour old will be deleted and can't be retrieved.
 
 #### Technologies used
 - 1 Nodejs
