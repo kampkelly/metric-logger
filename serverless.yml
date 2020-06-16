@@ -1,0 +1,28 @@
+service: metric-logger-api
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-1
+  memorySize: 128
+package:
+  excludeDevDependencies: false
+layers:
+  metric:
+    path: nodejs/node_modules
+    name: metric_dev_deps
+    description: Node modules for metric app"
+functions:
+  app:
+    handler: dist/index.run
+    layers:
+      - {Ref: MetricLambdaLayer}
+    events: 
+      - http: 
+          path: /
+          method: ANY
+          cors: true
+      - http: 
+          path: /{proxy+}
+          method: ANY
+          cors: true
