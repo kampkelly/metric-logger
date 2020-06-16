@@ -1,15 +1,20 @@
-# App
-_Metric Logger_
+# App Name
+### _Metric Logger_
 
 The hosted app on AWS lambda (serverless) can be found here: [https://vias7rl53l.execute-api.us-east-1.amazonaws.com/dev/](https://vias7rl53l.execute-api.us-east-1.amazonaws.com/dev/).
+
+The API documentation can be found here: [https://documenter.getpostman.com/view/7132396/SzzhddtP?version=latest](https://documenter.getpostman.com/view/7132396/SzzhddtP?version=latest).
+
 The pivotal tracker used for this app can be found here: [https://www.pivotaltracker.com/projects/2452590](https://www.pivotaltracker.com/projects/2452590).
+
+A demo of this app can be found here: [demo](https://youtu.be/8mMrYv_DjYM).
 
 # About
 A metric logging and reporting service that sums metrics by time window for the most recent hour.
 
-#### Technologies used at a glance
+#### Technologies used
 - 1 Nodejs
-- 2 AWS Serverless
+- 2 AWS Lambda
 
 #### Setup
 - 1 clone this repo.
@@ -39,4 +44,14 @@ Sample response:
 ```
 {
     "value": 11
-}```
+}
+```
+
+##### Screenshots
+Adding a metric
+
+<img src="https://i.imgur.com/8au1RdE.png" alt="drawing" width="600" />
+
+Get sum of a metric
+
+<img src="https://i.imgur.com/eV3s1vB.png" alt="drawing" width="600" />
