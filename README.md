@@ -1,7 +1,7 @@
 # App Name
 ### _Metric Logger_
 
-The hosted app on AWS lambda (serverless) can be found here: [https://vias7rl53l.execute-api.us-east-1.amazonaws.com/dev/](https://vias7rl53l.execute-api.us-east-1.amazonaws.com/dev/).
+The hosted app on AWS EC2 can be found here: [http://ec2-3-134-114-250.us-east-2.compute.amazonaws.com:5000](http://ec2-3-134-114-250.us-east-2.compute.amazonaws.com:5000).
 
 The API documentation can be found here: [https://documenter.getpostman.com/view/7132396/SzzhddtP?version=latest](https://documenter.getpostman.com/view/7132396/SzzhddtP?version=latest).
 
@@ -15,7 +15,7 @@ Any metric more than an hour old will be deleted and can't be retrieved.
 
 #### Technologies used
 - 1 Nodejs
-- 2 AWS Lambda
+- 2 AWS EC2
 
 #### Setup
 - 1 clone this repo.
