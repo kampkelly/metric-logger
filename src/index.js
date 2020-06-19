@@ -1,10 +1,12 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
+import cron from 'node-cron';
 import bodyParser from 'body-parser';
 import serverless from 'serverless-http';
 
 import metricRouter from './routes/metric';
+import metricController from './controllers/metricController';
 
 const app = express();
 const { PORT = 5000 } = process.env;
@@ -33,6 +35,9 @@ app.get('*', (req, res) => {
     status: 'Failed',
   });
 });
+
+// run a cron-job every hour to delete old metrics
+cron.schedule('0 * * * *', () => metricController.deleteOldMetrics(dataStructure));
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
