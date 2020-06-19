@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import getMetricValuesInLastHour from '../helpers/metrics';
+import returnMetricsInLastHour from '../helpers/metrics';
 
 /**
    * @export
@@ -15,7 +15,7 @@ class metricController {
     * @returns {object} - empty object
     */
   static addMetric(req, res) {
-    const datastructure = req.app.get('appData');
+    const dataStructure = req.app.get('appData');
     const { key } = req.params;
     const { value } = req.body;
 
@@ -26,15 +26,11 @@ class metricController {
       dateTime: currentDateTime,
     };
     // if key is already present, just add to it
-    if (key in datastructure.metrics) {
-      datastructure.metrics[key].push(metricData);
+    if (key in dataStructure.metrics) {
+      dataStructure.metrics[key].push(metricData);
     } else {
-      datastructure.metrics[key] = [metricData];
+      dataStructure.metrics[key] = [metricData];
     }
-
-    const oneHour = 1000 * 60 * 60;
-    // delete this metric after 1 hour
-    setTimeout(() => { datastructure.metrics[key].splice(0, 1); }, oneHour);
 
     return res.status(200).json({});
   }
@@ -46,16 +42,30 @@ class metricController {
     * @returns {object} - sum of metric values
     */
   static getMetricSum(req, res) {
-    const datastructure = req.app.get('appData');
+    const dataStructure = req.app.get('appData');
     const { key } = req.params;
-    if (key in datastructure.metrics) {
+    if (key in dataStructure.metrics) {
       // filter for only metrics that have been added in the last hour
-      const metricValuesInLastHour = datastructure.metrics[key].map(getMetricValuesInLastHour);
-      const sumValues = metricValuesInLastHour.reduce((sum, currentValue) => sum + currentValue, 0);
+      const metricsInLastHour = dataStructure.metrics[key].filter(returnMetricsInLastHour);
+      const sumValues = metricsInLastHour.reduce((sum, metric) => sum + metric.value, 0);
 
       return res.status(200).json({ value: sumValues });
     }
+
     return res.status(404).json({ message: 'Metric key not found!' });
+  }
+
+  /**
+    * @description -This method deletes metric older than 1 hour
+    * @param {object} data - The dataStructure object
+    * @returns {object} - None
+    */
+  static deleteOldMetrics(data) {
+    const dataStructure = data;
+    Object.keys(dataStructure.metrics).forEach((key) => {
+      // filter to remove metrics older than 1 hour
+      dataStructure.metrics[key] = dataStructure.metrics[key].filter(returnMetricsInLastHour);
+    });
   }
 }
 
