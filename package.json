@@ -43,6 +43,6 @@
     "moment": "^2.26.0",
     "node-cron": "^2.0.3",
     "serverless-http": "^2.5.0",
-    "serverless-offline": "^6.4.0"
+    "serverless-offline": "^12.0.4"
   }
 }
